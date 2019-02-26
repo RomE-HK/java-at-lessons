@@ -13,12 +13,13 @@ public class NotepadRecord {
         lastChange = new Date();
     }
 
-    NotepadRecord(String title, String note) {
+    NotepadRecord(String title, String text) {
         noteTitle = title;
-        noteText = note;
+        noteText = text;
         lastChange = new Date();
     }
 
+    // Ждёт переопределения toString
     public void showRecord() {
         System.out.println("Title: " + noteTitle);
         System.out.println("Text: " + noteText);
@@ -27,28 +28,29 @@ public class NotepadRecord {
         //System.out.println(this);
     }
 
-    private Date dateUpdate() {
-        this.lastChange = new Date();
-        return this.lastChange;
-    }
-
     public void changeTitle(String newTitle) {
-        this.noteTitle = newTitle;
-        this.dateUpdate();
+        noteTitle = newTitle;
+        dateUpdate();
     }
 
     public void changeText(String newText) {
-        this.noteText = newText;
-        this.dateUpdate();
+        noteText = newText;
+        dateUpdate();
     }
 
     public void replaceRecord(NotepadRecord newNote) {
         this.noteText = newNote.noteText;
         this.noteTitle = newNote.noteTitle;
+        this.lastChange = newNote.lastChange;
     }
-
+    @Override
     public String toString() {
         //StringBuilder sb = new StringBuilder();
         return "";
+    }
+    
+    private Date dateUpdate() {
+        lastChange = new Date();
+        return lastChange;
     }
 }
