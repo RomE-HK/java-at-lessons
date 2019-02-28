@@ -73,7 +73,7 @@ public class Notepad {
 
         } else if ((notesCount > MIN_ARRAY_LENGTH) && (notesCount < allNotes.length / 2)) {
             newArraySize = allNotes.length / 4 * 3; // Отрубаем у массива четверть, если используется меньше половины
-        } else if ((notesCount < MIN_ARRAY_LENGTH) && (notesCount < allNotes.length / 2)) {
+        } else if ((notesCount < MIN_ARRAY_LENGTH) && (allNotes.length > MIN_ARRAY_LENGTH * 1.5)) {
             newArraySize = MIN_ARRAY_LENGTH; // Сжатие массива до минимального размера
         } else {
             System.out.println("Resize doesn't need");
