@@ -16,11 +16,12 @@ public class Notepad {
     public NotepadRecord getNote(int noteIndex) {
         if ((noteIndex >= 0) && (noteIndex < notesCount)) {
             return allNotes[noteIndex];
-        } else
+        } else {
+            System.out.println("Null returned!");
             return null;
+        }
     }
 
-    // Пока только набросок
     public void addNote(NotepadRecord note) {
         if (note instanceof NotepadRecord) {
             allNotes[notesCount] = note;
@@ -50,6 +51,8 @@ public class Notepad {
     public void showNote(int noteIndex) {
         if ((noteIndex >= 0) && (noteIndex < notesCount)) {
             allNotes[noteIndex].showRecord();
+        } else {
+            System.out.println("Wrong note index");
         }
     }
 
@@ -84,6 +87,5 @@ public class Notepad {
         NotepadRecord[] newArray = Arrays.copyOf(allNotes, newArraySize);
         allNotes = newArray;
         System.out.println("Resize completed succesfully");
-        return;
     }
 }
