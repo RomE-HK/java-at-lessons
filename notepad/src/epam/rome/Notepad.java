@@ -12,23 +12,23 @@ public class Notepad {
         allNotes = new NotepadRecord[MIN_ARRAY_LENGTH];
     }
 
-    // Нужен ли этот геттер? -_-
     public NotepadRecord getNote(int noteIndex) {
         if ((noteIndex >= 0) && (noteIndex < notesCount)) {
             return allNotes[noteIndex];
         } else {
-            System.out.println("Null returned!");
-            return null;
+            System.out.println("Empty object returned because of null at index");
+            return new NotepadRecord();
+            // Как вернуть не null? Только новая запись? Тогда получается она взялась ниоткуда
         }
     }
 
     public void addNote(NotepadRecord note) {
-        if (note instanceof NotepadRecord) {
+        if (note != null) {
             allNotes[notesCount] = note;
             notesCount++;
             resizeArray();
         } else {
-            System.out.println("Wrong input type of data");
+            System.out.println("Wrong input type");
         }
     }
 
@@ -36,15 +36,23 @@ public class Notepad {
         if ((noteIndex >= 0) && (noteIndex < notesCount)) {
             if (noteIndex < notesCount - 1) {
                 allNotes[noteIndex] = allNotes[notesCount - 1];
+                // allNotes[noteIndex].replaceRecord(allNotes[notesCount - 1]);
             }
             allNotes[notesCount - 1] = null;
-            // allNotes[noteIndex].replaceRecord(allNotes[notesCount - 1]);
             // allNotes[notesCount - 1].replaceRecord(null);
             notesCount--;
             resizeArray();
             System.out.println("Note deleted");
         } else {
             System.out.println("Wrong note index");
+        }
+    }
+
+    public void replaceNote(NotepadRecord note, int noteIndex) {
+        if ((note != null) && (noteIndex >= 0) && (noteIndex < notesCount)) {
+            allNotes[noteIndex] = note;
+        } else {
+            System.out.println("Wrong input type or index");
         }
     }
 
@@ -83,7 +91,6 @@ public class Notepad {
             return;
         }
 
-        // Поправить вызов этого куска
         NotepadRecord[] newArray = Arrays.copyOf(allNotes, newArraySize);
         allNotes = newArray;
         System.out.println("Resize completed succesfully");

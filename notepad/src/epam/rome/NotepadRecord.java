@@ -1,52 +1,47 @@
 package epam.rome;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class NotepadRecord {
-    private String noteTitle;
-    private String noteText;
+    private String title;
+    private String text;
     private Date lastChange;
 
     NotepadRecord() {
-        noteTitle = "";
-        noteText = "";
+        title = "Default";
+        text = "Default";
         lastChange = new Date();
     }
 
     NotepadRecord(String title, String text) {
-        noteTitle = title;
-        noteText = text;
+        this.title = title;
+        this.text = text;
         lastChange = new Date();
     }
 
-    // Ждёт переопределения toString
     public void showRecord() {
-        System.out.println("Title: " + noteTitle);
-        System.out.println("Text: " + noteText);
-        System.out.println("Changed: " + lastChange);
-        System.out.println();
-        //System.out.println(this);
+        System.out.println(this);
     }
 
     public void changeTitle(String newTitle) {
-        noteTitle = newTitle;
+        title = newTitle;
         dateUpdate();
     }
 
     public void changeText(String newText) {
-        noteText = newText;
+        text = newText;
         dateUpdate();
     }
 
-    public void replaceRecord(NotepadRecord newNote) {
-        this.noteText = newNote.noteText;
-        this.noteTitle = newNote.noteTitle;
-        this.lastChange = newNote.lastChange;
-    }
     @Override
     public String toString() {
-        //StringBuilder sb = new StringBuilder();
-        return "";
+        StringBuilder builder = new StringBuilder();
+        builder.append("Title: " + title + "\n");
+        builder.append("Text: " + text + "\n");
+        SimpleDateFormat formatForFate = new SimpleDateFormat("dd.MM.yyyy kk:mm:ss");
+        builder.append("Changed: " + formatForFate.format(lastChange) + "\n");
+        return builder.toString();
     }
     
     private Date dateUpdate() {
