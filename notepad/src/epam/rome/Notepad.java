@@ -1,6 +1,7 @@
 package epam.rome;
 
 import java.util.Arrays;
+import java.util.Comparator;
 
 public class Notepad {
     private static final int MIN_ARRAY_LENGTH = 32;
@@ -74,6 +75,14 @@ public class Notepad {
 
     public int numberOfNotes() {
         return notesCount;
+    }
+
+    public void dateSort() {
+        Arrays.sort(allNotes, Comparator.comparing(NotepadRecord::getDate));
+    }
+
+    public void titleSort() {
+        Arrays.sort(allNotes, Comparator.comparing(NotepadRecord::getTitle));
     }
 
     private void resizeArray() {

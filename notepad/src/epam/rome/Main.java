@@ -41,6 +41,10 @@ public class Main {
         pad.addNote(new NotepadRecord());
 
         pad.showAllNotes();
+
+        pad.titleSort();
+        pad.dateSort();
+
         System.out.println(pad.numberOfNotes());
     }
 }

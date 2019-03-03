@@ -20,10 +20,6 @@ public class NotepadRecord {
         lastChange = new Date();
     }
 
-    public void showRecord() {
-        System.out.println(this);
-    }
-
     public void changeTitle(String newTitle) {
         title = newTitle;
         dateUpdate();
@@ -32,6 +28,18 @@ public class NotepadRecord {
     public void changeText(String newText) {
         text = newText;
         dateUpdate();
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public Date getDate() {
+        return lastChange;
+    }
+
+    public void showRecord() {
+        System.out.println(this);
     }
 
     @Override
@@ -43,7 +51,7 @@ public class NotepadRecord {
         builder.append("Changed: " + formatForFate.format(lastChange) + "\n");
         return builder.toString();
     }
-    
+
     private Date dateUpdate() {
         lastChange = new Date();
         return lastChange;
