@@ -13,6 +13,13 @@ public class Notepad {
         allNotes = new NotepadRecord[MIN_ARRAY_LENGTH];
     }
 
+    public NotepadRecord createNote(String title, String text) {
+        if (title.length() > 0 || text.length() > 0) {
+            return new NotepadRecord(title, text);
+        }
+        return new NotepadRecord();
+    }
+
     public NotepadRecord getNote(int noteIndex) {
         if ((noteIndex >= 0) && (noteIndex < notesCount)) {
             return allNotes[noteIndex];
@@ -73,7 +80,7 @@ public class Notepad {
         }
     }
 
-    public int numberOfNotes() {
+    public int getNotesCount() {
         return notesCount;
     }
 
