@@ -9,7 +9,7 @@ public class Main {
     }
 
     static class Menu {
-        static Notepad pad = new Notepad();
+        static Notepad pad = Notepad.getInstance();
         static StringBuilder info = new StringBuilder();
         static String userInput = "";
         static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -39,8 +39,8 @@ public class Main {
                     sortingMenu();
                     break;
                 case ("9"):
-                    // someTestsRun();
-                    someTestsRun(pad);
+                    someTestsRun();
+                    //someTestsRun(pad);
                     break;
                 case ("0"):
                     menuRepeat = false;
@@ -261,8 +261,8 @@ public class Main {
             return userInput;
         }
 
-        public static void someTestsRun(Notepad pad) {
-            // Notepad pad = new Notepad();
+        public static void someTestsRun() {
+            Notepad pad = Notepad.getInstance();
             boolean sortTest = false;
 
             NotepadRecord note0 = new NotepadRecord("Zoglavie", "Test your luck!");

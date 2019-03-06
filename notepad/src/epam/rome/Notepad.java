@@ -5,10 +5,15 @@ import java.util.Comparator;
 
 public class Notepad {
     private static final int MIN_ARRAY_LENGTH = 32;
-    private int notesCount;
-    private NotepadRecord[] allNotes;
+    private static int notesCount;
+    private static NotepadRecord[] allNotes;
+    private static Notepad neoInstance = new Notepad();
 
-    Notepad() {
+    public static Notepad getInstance() {
+        return neoInstance;
+    }
+
+    private Notepad() {
         notesCount = 0;
         allNotes = new NotepadRecord[MIN_ARRAY_LENGTH];
     }
