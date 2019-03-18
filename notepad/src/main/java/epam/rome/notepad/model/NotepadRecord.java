@@ -1,4 +1,4 @@
-package epam.rome;
+package epam.rome.notepad.model;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -8,13 +8,13 @@ public class NotepadRecord {
     private String text;
     private Date lastChange;
 
-    NotepadRecord() {
+    public NotepadRecord() {
         title = "Default";
         text = "Default";
         lastChange = new Date();
     }
 
-    NotepadRecord(String title, String text) {
+    public NotepadRecord(String title, String text) {
         this.title = title;
         this.text = text;
         lastChange = new Date();
@@ -52,8 +52,7 @@ public class NotepadRecord {
         return builder.toString();
     }
 
-    private Date dateUpdate() {
+    private void dateUpdate() {
         lastChange = new Date();
-        return lastChange;
     }
 }

@@ -1,4 +1,7 @@
-package epam.rome;
+package epam.rome.notepad;
+
+import epam.rome.notepad.model.Notepad;
+import epam.rome.notepad.model.NotepadRecord;
 
 import java.io.*;
 
@@ -24,7 +27,7 @@ public class Main {
                 info.append("2 - Showing notes and info\n");
                 info.append("3 - (TESTING!) Sorting\n");
                 info.append("9 - Test run\n");
-                info.append("0 - Exit programm \n");
+                info.append("0 - Exit program \n");
 
                 System.out.println(info);
                 userInput = inputRead();
@@ -50,7 +53,6 @@ public class Main {
                 }
                 System.out.println("\nHello there\n");
             }
-            return;
         }
 
         public static void workWithNotesMenu() {
@@ -89,7 +91,6 @@ public class Main {
                     break;
                 }
             }
-            return;
         }
 
         public static void newNoteMenu() {
@@ -133,7 +134,6 @@ public class Main {
                     break;
                 }
             }
-            return;
         }
 
         public static void changeNoteMenu() {
@@ -177,7 +177,6 @@ public class Main {
                     break;
                 }
             }
-            return;
         }
 
         public static void notesAndInfoMenu() {
@@ -208,7 +207,7 @@ public class Main {
                     pad.showAllNotes();
                     break;
                 case ("3"):
-                    pad.getNotesCount();
+                    System.out.println(pad.getNotesCount());
                     break;
                 case ("0"):
                     menuRepeat = false;
@@ -217,7 +216,6 @@ public class Main {
                     break;
                 }
             }
-            return;
         }
 
         public static void sortingMenu() {
@@ -247,7 +245,6 @@ public class Main {
                     break;
                 }
             }
-            return;
         }
 
         public static String inputRead() {

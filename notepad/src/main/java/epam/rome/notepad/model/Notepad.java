@@ -1,4 +1,4 @@
-package epam.rome;
+package epam.rome.notepad.model;
 
 import java.util.Arrays;
 import java.util.Comparator;
@@ -112,8 +112,7 @@ public class Notepad {
             return;
         }
 
-        NotepadRecord[] newArray = Arrays.copyOf(allNotes, newArraySize);
-        allNotes = newArray;
-        System.out.println("Resize completed succesfully");
+        allNotes = Arrays.copyOf(allNotes, newArraySize);
+        System.out.println("Resize completed successfully");
     }
 }
