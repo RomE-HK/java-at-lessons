@@ -1,4 +1,4 @@
-package epam.rome.binaryIO;
+package epam.rome.binaryio;
 
 public class Main {
 
