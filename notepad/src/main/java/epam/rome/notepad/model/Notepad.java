@@ -1,7 +1,8 @@
 package epam.rome.notepad.model;
 
 import java.util.Arrays;
-import java.util.Comparator;
+import static java.util.Comparator.comparing;
+import static java.util.Comparator.nullsLast;
 
 public class Notepad {
     private static final int MIN_ARRAY_LENGTH = 32;
@@ -18,8 +19,12 @@ public class Notepad {
         allNotes = new NotepadRecord[MIN_ARRAY_LENGTH];
     }
 
+    public static boolean isStringEmpty(String str) {
+        return str == null || str.trim().isEmpty();
+    }
+
     public NotepadRecord createNote(String title, String text) {
-        if (title.length() > 0 || text.length() > 0) {
+        if (!isStringEmpty(title) || !isStringEmpty(text)) {
             return new NotepadRecord(title, text);
         }
         return new NotepadRecord();
@@ -29,9 +34,8 @@ public class Notepad {
         if ((noteIndex >= 0) && (noteIndex < notesCount)) {
             return allNotes[noteIndex];
         } else {
-            System.out.println("Empty object returned because of null at index");
-            return new NotepadRecord();
-            // Как вернуть не null? Только новая запись? Тогда получается она взялась ниоткуда
+            System.out.println("Null returned because of wrong index");
+            return null;
         }
     }
 
@@ -45,7 +49,7 @@ public class Notepad {
         }
     }
 
-    public void delNote(int noteIndex) {
+    public void deleteNote(int noteIndex) {
         if ((noteIndex >= 0) && (noteIndex < notesCount)) {
             if (noteIndex < notesCount - 1) {
                 allNotes[noteIndex] = allNotes[notesCount - 1];
@@ -78,6 +82,7 @@ public class Notepad {
     }
 
     public void showAllNotes() {
+        dateSort();
         for (int i = 0; i < notesCount; i++) {
             System.out.println(i + " pos in allNotes");
             System.out.println(i + 1 + " ordinal number");
@@ -90,11 +95,11 @@ public class Notepad {
     }
 
     public void dateSort() {
-        Arrays.sort(allNotes, Comparator.comparing(NotepadRecord::getDate));
+        Arrays.sort(allNotes, nullsLast(comparing(NotepadRecord::getDate)));
     }
 
     public void titleSort() {
-        Arrays.sort(allNotes, Comparator.comparing(NotepadRecord::getTitle));
+        Arrays.sort(allNotes, nullsLast(comparing(NotepadRecord::getTitle)));
     }
 
     private void resizeArray() {

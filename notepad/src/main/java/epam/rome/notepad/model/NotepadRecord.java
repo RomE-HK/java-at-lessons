@@ -9,9 +9,7 @@ public class NotepadRecord {
     private Date lastChange;
 
     public NotepadRecord() {
-        title = "Default";
-        text = "Default";
-        lastChange = new Date();
+        this("Default", "Default");
     }
 
     public NotepadRecord(String title, String text) {

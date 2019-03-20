@@ -25,7 +25,7 @@ public class Main {
                 info.append("\nChoose wisely:\n");
                 info.append("1 - Work with notes\n");
                 info.append("2 - Showing notes and info\n");
-                info.append("3 - (TESTING!) Sorting\n");
+                info.append("3 - Sorting\n");
                 info.append("9 - Test run\n");
                 info.append("0 - Exit program \n");
 
@@ -79,7 +79,7 @@ public class Main {
                     System.out.println("Enter note index to delete");
                     try {
                         int noteToDelete = Integer.parseInt(inputRead());
-                        pad.delNote(noteToDelete);
+                        pad.deleteNote(noteToDelete);
                     } catch (NumberFormatException e) {
                         System.out.println("Wrong input");
                     }
@@ -140,6 +140,7 @@ public class Main {
             boolean menuRepeat = true;
             while (menuRepeat) {
                 int noteToChange;
+                NotepadRecord note;
                 info = new StringBuilder();
 
                 System.out.println("Enter changing note index or something below 0 to exit");
@@ -163,12 +164,21 @@ public class Main {
                 case ("1"):
                     System.out.println("Enter note title");
                     String title = inputRead();
-                    pad.getNote(noteToChange).changeTitle(title);
+                    //pad.getNote(noteToChange).changeTitle(title);
+                    note = pad.getNote(noteToChange);
+                    if (note != null) {
+                        note.changeTitle(title);
+                        pad.replaceNote(note, noteToChange);
+                    }
                     break;
                 case ("2"):
                     System.out.println("Enter note text");
                     String text = inputRead();
-                    pad.getNote(noteToChange).changeTitle(text);
+                    note = pad.getNote(noteToChange);
+                    if (note != null) {
+                        note.changeText(text);
+                        pad.replaceNote(note, noteToChange);
+                    }
                     break;
                 case ("0"):
                     menuRepeat = false;
@@ -260,7 +270,7 @@ public class Main {
 
         public static void someTestsRun() {
             Notepad pad = Notepad.getInstance();
-            boolean sortTest = false;
+            boolean sortTest = true;
 
             NotepadRecord note0 = new NotepadRecord("Zoglavie", "Test your luck!");
             NotepadRecord note1 = new NotepadRecord("Zaglavie", "Test your might!");
@@ -274,18 +284,16 @@ public class Main {
             pad.addNote(null);
 
             for (int i = 0; i < 30; i++) {
-                pad.delNote(35);
-                pad.delNote(16);
-                pad.delNote(2);
-                pad.delNote(1);
+                pad.deleteNote(35);
+                pad.deleteNote(16);
+                pad.deleteNote(2);
+                pad.deleteNote(1);
             }
 
             NotepadRecord freshNote = new NotepadRecord("WTF", "Why am I here?");
             pad.replaceNote(freshNote, 29);
 
-            NotepadRecord noteChange = pad.getNote(200); // Вернёт пустую запись вместо null
-            noteChange.changeTitle("Hi!");
-            noteChange.changeText("Let's rock!");
+            NotepadRecord noteChange = pad.getNote(200); // Вернёт null
             pad.replaceNote(noteChange, 200); // Скажет о неверном индексе
 
             pad.replaceNote(null, 18); // Выдаст сообщение вида "Ты втираешь мне какую-то дичь"
@@ -300,8 +308,8 @@ public class Main {
             pad.showAllNotes();
 
             if (sortTest) {
-                pad.titleSort();
                 pad.dateSort();
+                pad.titleSort();
             }
             System.out.println(pad.getNotesCount());
         }
