@@ -1,8 +1,10 @@
 package epam.rome.binaryio;
 
+import java.io.BufferedReader;
 import java.io.FileOutputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class BinaryIOFindKeyWords {
 
@@ -27,5 +29,19 @@ public class BinaryIOFindKeyWords {
         catch(IOException ex){
             System.out.println(ex.getMessage());
         }
+    }
+
+    public static void pullKeyWords() {
+        try{
+            FileInputStream fstream = new FileInputStream("keywords.txt");
+            BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
+            String strLine;
+            while ((strLine = br.readLine()) != null){
+               System.out.println(strLine);
+            }
+            br.close();
+         }catch (IOException ex){
+            System.out.println(ex.getMessage());
+         }
     }
 }
