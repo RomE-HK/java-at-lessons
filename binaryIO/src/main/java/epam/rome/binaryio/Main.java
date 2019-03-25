@@ -6,10 +6,11 @@ import java.util.HashMap;
 public class Main {
 
     public static void main(String[] args) {
-        Map<String, Integer> keywordsAmout = new HashMap<String, Integer>();
-        BinaryIOFindKeyWords.writeFile();
-        BinaryIOFindKeyWords.readFile();
-        keywordsAmout = BinaryIOFindKeyWords.pullKeyWords();
+        String keywordsFilePath = "binaryIO/src/main/java/epam/rome/binaryio/keywords.txt";
+        BinaryIOFindKeyWords.pullKeyWords(keywordsFilePath);
+        String readingFilePath = "binaryIO/src/main/java/epam/rome/binaryio/reading.class";
+        BinaryIOFindKeyWords.readFile(readingFilePath);
+        
         return;
     }
 }
