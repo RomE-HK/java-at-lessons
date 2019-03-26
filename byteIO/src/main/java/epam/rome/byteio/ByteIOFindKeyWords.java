@@ -6,53 +6,55 @@ import java.io.IOException;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.Map;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 public class ByteIOFindKeyWords {
 
-    private static Map<String, Integer> map = new HashMap<String, Integer>();
-
-    public static void readFile(String filePath) {
+    public static Map<String, Integer> getKeyWordsFromFile(String filePath) {
+        Map<String, Integer> map = new LinkedHashMap<String, Integer>();
         try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filePath)))) {
-            String strLine;
-            while ((strLine = br.readLine()) != null) {
-                findMathes(map, strLine);
+            String fileLine;
+            while ((fileLine = br.readLine()) != null) {
+                map.put(fileLine, 0);
             }
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
-        for (Map.Entry<String, Integer> entry : map.entrySet()) {
-            if (entry.getValue() != 0) {
-                System.out.println(entry.getKey() + " : " + entry.getValue());
-            }
-        }
-        return;
+        return map;
     }
 
-    public static void writeFile() {
-        String filePath = "byteIO/src/main/java/epam/rome/byteio/str.java";
+    public static void readFile(Map<String, Integer> map, String filePath) {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filePath)))) {
+            String fileLine;
+            while ((fileLine = br.readLine()) != null) {
+                findMathesInString(map, fileLine);
+            }
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    public static void writeFile(Map<String, Integer> map, String filePath) {
         try (FileOutputStream fos = new FileOutputStream(filePath)) {
-            String text = "Hello world!";
-            byte[] buffer = text.getBytes();
-            fos.write(buffer, 0, buffer.length);
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
-        }
-    }
-
-    public static void /*Map<String, Integer>*/ pullKeyWords(String filePath) {
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filePath)))) {
-            String strLine;
-            while ((strLine = br.readLine()) != null) {
-                map.put(strLine, 0);
+            for (Map.Entry<String, Integer> entry : map.entrySet()) {
+                if (entry.getValue() != 0) {
+                    String line = entry.getKey() + " : " + entry.getValue() + System.lineSeparator();
+                    byte[] buffer = line.getBytes();
+                    fos.write(buffer);
+                }
             }
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
-        // return map;
     }
 
-    public static void findMathes(Map<String, Integer> map, String str) {
+    public static void printAllMap(Map<String, Integer> map) {
+        for (Map.Entry<String, Integer> entry : map.entrySet()) {
+            System.out.print(entry.getKey() + " : " + entry.getValue() + System.lineSeparator());
+        }
+    }
+
+    private static void findMathesInString(Map<String, Integer> map, String str) {
         String[] words = str.split(" ");
         for (String subStr : words) {
             if (map.containsKey(subStr)) {

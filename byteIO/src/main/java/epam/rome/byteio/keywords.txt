@@ -1,4 +1,5 @@
 abstract
+assert
 boolean
 break
 byte
@@ -12,6 +13,7 @@ default
 do
 double
 else
+enum
 extends
 final
 finally
@@ -35,6 +37,7 @@ public
 return
 short
 static
+strictfp
 super
 switch
 synchronized
@@ -46,6 +49,3 @@ try
 void
 volatile
 while
-assert
-enum
-strictfp
