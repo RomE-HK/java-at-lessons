@@ -1,4 +1,4 @@
-package epam.rome.binaryio;
+package epam.rome.byteio;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -8,7 +8,7 @@ import java.io.FileOutputStream;
 import java.util.Map;
 import java.util.HashMap;
 
-public class BinaryIOFindKeyWords {
+public class ByteIOFindKeyWords {
 
     private static Map<String, Integer> map = new HashMap<String, Integer>();
 
@@ -30,7 +30,7 @@ public class BinaryIOFindKeyWords {
     }
 
     public static void writeFile() {
-        String filePath = "binaryIO/src/main/java/epam/rome/binaryio/str.java";
+        String filePath = "byteIO/src/main/java/epam/rome/byteio/str.java";
         try (FileOutputStream fos = new FileOutputStream(filePath)) {
             String text = "Hello world!";
             byte[] buffer = text.getBytes();
