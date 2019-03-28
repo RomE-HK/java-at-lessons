@@ -1,11 +1,10 @@
 package epam.rome.moviescollection.model;
 
-import org.jetbrains.annotations.Nullable;
-
+import java.io.Serializable;
 import java.util.TreeSet;
 
-public class FilmsSet {
-    private static TreeSet<Film> allFilms;
+public class FilmsSet implements Serializable {
+    private TreeSet<Film> allFilms;
 
     public FilmsSet() {
         allFilms = new TreeSet<>();
@@ -15,7 +14,6 @@ public class FilmsSet {
         allFilms.add(film);
     }
 
-    @Nullable
     public Film getFilm(String searchTitle, int searchYear) {
         for (Film film : allFilms) {
             if (film.getTitle().equals(searchTitle) && film.getYear() == searchYear) {

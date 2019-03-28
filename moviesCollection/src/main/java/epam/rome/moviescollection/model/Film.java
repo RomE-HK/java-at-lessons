@@ -2,14 +2,13 @@ package epam.rome.moviescollection.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class Film implements Serializable, Comparable<Film> {
     private String title;
     private int year;
     private String genre;
-    private List<Actor> cast = new ArrayList<>();
+    private ArrayList<Actor> cast = new ArrayList<>();
 
     public Film() {
         this("La voltige", 1895);
@@ -82,7 +81,7 @@ public class Film implements Serializable, Comparable<Film> {
         builder.append(genre + System.lineSeparator());
         for (Actor actor : cast) {
             builder.append(actor.getFullName() + System.lineSeparator());
-        } /// В принципе то же самое что showCast
+        } /// В принципе то же самое что showCast, надо обдумать
         return builder.toString();
     }
 }
