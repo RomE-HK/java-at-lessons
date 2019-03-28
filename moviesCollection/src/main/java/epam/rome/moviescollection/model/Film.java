@@ -1,26 +1,30 @@
 package epam.rome.moviescollection.model;
 
 import java.io.Serializable;
-import java.util.Map;
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
 
 
-public class Film implements Serializable {
+public class Film implements Serializable, Comparable<Film> {
     private String title;
     private int year;
     private String genre;
-    private Map<String, Actor> roles = new HashMap<String, Actor>();
-
-    private enum Genre {
-        History, SciFi, Fantasy, Comedy, Drama, Romantic, Action, Thriller, Horror
-    }
+    private List<Actor> cast = new ArrayList<>();
 
     public Film() {
         this("La voltige", 1895);
     }
 
     public Film(String title, int year) {
+        setTitle(title);
+        setYear(year);
+    }
+
+    public void setTitle(String title) {
         this.title = title;
+    }
+
+    public void setYear(int year) {
         this.year = year;
     }
 
@@ -28,8 +32,25 @@ public class Film implements Serializable {
         this.genre = genre;
     }
 
-    public void addRoleAndActor(String role, Actor actor) {
-        roles.put(role, actor);
+    public void addActor(Actor actor) {
+        cast.add(actor);
+    }
+
+    public Actor getActor(String surname) {
+        for (Actor actor : cast) {
+            if (actor.getFullName().contains(surname)) {
+                return actor;
+            }
+        }
+        return null;
+    }
+
+    public void deleteActor(String surname) {
+        for (Actor actor : cast) {
+            if (actor.getFullName().contains(surname)) {
+                cast.remove(actor);
+            }
+        }
     }
 
     public String getTitle() {
@@ -45,15 +66,24 @@ public class Film implements Serializable {
     }
 
     public void showCast() {
-        for (Map.Entry<String, Actor> entry : roles.entrySet()) {
-            System.out.print(entry.getKey() + " by " +  entry.getValue().getFullName());
+        for (Actor actor : cast) {
+            System.out.println(actor.getFullName());
         }
+    }
+
+    public int compareTo(Film film){
+        return title.compareTo(film.getTitle());
     }
 
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-
+        builder.append(System.lineSeparator() + title + ", " + year + System.lineSeparator());
+        builder.append(genre + System.lineSeparator());
+        for (Actor actor : cast) {
+            builder.append(actor.getFullName() + System.lineSeparator());
+        } /// В принципе то же самое что showCast
         return builder.toString();
     }
 }
+

@@ -6,7 +6,6 @@ import java.util.Calendar;
 public class Actor implements Serializable {
     private String name;
     private String surname;
-    private String sex;
     private int yearOfBorn;
 
     public Actor() {
@@ -18,21 +17,15 @@ public class Actor implements Serializable {
         this.surname = surname;
     }
 
-    public void setSex(String sex) {
-        this.sex = sex;
-    }
 
     public void setYearOfBorn(int year) {
         yearOfBorn = year;
     }
 
     public String getFullName() {
-        return name + surname;
+        return name + " " + surname;
     }
 
-    public String getSex() {
-        return sex;
-    }
 
     public int getYearOfBorn() {
         return yearOfBorn;
@@ -42,9 +35,8 @@ public class Actor implements Serializable {
     public String toString() {
         StringBuilder builder = new StringBuilder();
         builder.append(getFullName() + System.lineSeparator());
-        builder.append(sex + System.lineSeparator());
-        int ages = Calendar.getInstance().get(Calendar.YEAR) - yearOfBorn;
-        builder.append("Age of " + ages).append(", " + yearOfBorn);
+        int ages = Calendar.getInstance().get(Calendar.YEAR) - getYearOfBorn();
+        builder.append("Age of " + ages).append(", " + getYearOfBorn());
         return builder.toString();
     }
 }
