@@ -29,31 +29,19 @@ public class Main {
 
             myCollection.addFilm(firstFilm);
             myCollection.showAllFilms();
-
-
-            try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("moviesCollection.dat"))) {
-                oos.writeObject(myCollection);
-            } catch (Exception ex) {
-
-                System.out.println(ex.getMessage());
-            }
+            serializeCollection(myCollection);
         } else {
-            try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream("moviesCollection.dat")))
-            {
-                FilmsSet myCollection = (FilmsSet)ois.readObject();
+            FilmsSet myCollection = deserializeCollection();
+            myCollection.showAllFilms();
 
-                System.out.println("Enter the title and the year of new film:");
-                String newFilmTitle = inputRead();
-                int yearOfNewFilmTitle = Integer.parseInt(inputRead());
-                Film oneMoreFilm = new Film(newFilmTitle, yearOfNewFilmTitle);
-                myCollection.addFilm(oneMoreFilm);
+            System.out.println("Enter the title and the year of new film:");
+            String newFilmTitle = inputRead();
+            int yearOfNewFilmTitle = Integer.parseInt(inputRead());
+            Film oneMoreFilm = new Film(newFilmTitle, yearOfNewFilmTitle);
 
-                myCollection.showAllFilms();
-            }
-            catch(Exception ex){
-
-                System.out.println(ex.getMessage());
-            }
+            myCollection.addFilm(oneMoreFilm);
+            myCollection.showAllFilms();
+            serializeCollection(myCollection);
         }
     }
 
@@ -67,5 +55,24 @@ public class Main {
             return userInput;
         }
         return userInput;
+    }
+
+    public static void serializeCollection(FilmsSet collection) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("moviesCollection.dat"))) {
+            oos.writeObject(collection);
+        } catch (Exception ex) {
+
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    public static FilmsSet deserializeCollection() {
+        try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream("moviesCollection.dat"))) {
+            return (FilmsSet)ois.readObject();
+        }
+        catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }
+        return null;
     }
 }
