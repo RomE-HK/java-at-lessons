@@ -11,7 +11,7 @@ import java.util.LinkedHashMap;
 public class ByteIOFindKeyWords {
 
     public static Map<String, Integer> getKeyWordsFromFile(String filePath) {
-        Map<String, Integer> map = new LinkedHashMap<String, Integer>();
+        Map<String, Integer> map = new LinkedHashMap<>();
         try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filePath)))) {
             String fileLine;
             while ((fileLine = br.readLine()) != null) {
@@ -23,11 +23,11 @@ public class ByteIOFindKeyWords {
         return map;
     }
 
-    public static void readFile(Map<String, Integer> map, String filePath) {
+    public static void findMatchesInFile(Map<String, Integer> map, String filePath) {
         try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filePath)))) {
             String fileLine;
             while ((fileLine = br.readLine()) != null) {
-                findMathesInString(map, fileLine);
+                findMatchesInString(map, fileLine);
             }
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
@@ -54,7 +54,7 @@ public class ByteIOFindKeyWords {
         }
     }
 
-    private static void findMathesInString(Map<String, Integer> map, String str) {
+    private static void findMatchesInString(Map<String, Integer> map, String str) {
         String[] words = str.split(" ");
         for (String subStr : words) {
             if (map.containsKey(subStr)) {
