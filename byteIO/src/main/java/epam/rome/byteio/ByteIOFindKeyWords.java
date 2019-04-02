@@ -31,11 +31,7 @@ public class ByteIOFindKeyWords {
     }
 
     public static boolean findMatchesInFile(Map<String, Integer> map, String filePath) {
-        if (!isFilePathExist(filePath)) {
-            return false;
-        }
-        if (map == null || map.isEmpty()) {
-            System.out.println("The map is empty or null");
+        if (!checkArguments(map, filePath)) {
             return false;
         }
 
@@ -51,7 +47,11 @@ public class ByteIOFindKeyWords {
         return true;
     }
 
-    public static void writeFile(Map<String, Integer> map, String filePath) {
+    public static boolean writeFile(Map<String, Integer> map, String filePath) {
+        if (isStringEmpty(filePath) || isMapEmpty(map)) {
+            return false;
+        }
+
         try (FileOutputStream fos = new FileOutputStream(filePath)) {
             for (Map.Entry<String, Integer> entry : map.entrySet()) {
                 if (entry.getValue() != 0) {
@@ -63,12 +63,18 @@ public class ByteIOFindKeyWords {
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
+        System.out.println("Matches successfully wrote to file");
+        return true;
     }
 
-    public static void printAllMap(Map<String, Integer> map) {
+    public static boolean printAllMap(Map<String, Integer> map) {
+        if (isMapEmpty(map)) {
+            return false;
+        }
         for (Map.Entry<String, Integer> entry : map.entrySet()) {
             System.out.print(entry.getKey() + " : " + entry.getValue() + System.lineSeparator());
         }
+        return true;
     }
 
     private static void findMatchesInString(Map<String, Integer> map, String str) {
@@ -84,9 +90,26 @@ public class ByteIOFindKeyWords {
         return value == null || "".equals(value.trim());
     }
 
+    private static boolean isMapEmpty(Map<String, Integer> map) {
+        if (map == null || map.isEmpty()) {
+            System.out.println("The keywords map is empty or null");
+            return true;
+        }
+        return false;
+    }
+
     private static boolean isFilePathExist(String value) {
-        if (isStringEmpty(value) || !Files.exists(Paths.get(value))) {
-            System.out.println("Wrong filepath");
+        if (!isStringEmpty(value) && Files.exists(Paths.get(value))) {
+            return true;
+        }
+        System.out.println("Wrong filepath");
+        return false;
+    }
+
+    private static boolean checkArguments(Map<String, Integer> map, String filePath) {
+        if (!isFilePathExist(filePath)) {
+            return false;
+        } else if (isMapEmpty(map)) {
             return false;
         }
         return true;
