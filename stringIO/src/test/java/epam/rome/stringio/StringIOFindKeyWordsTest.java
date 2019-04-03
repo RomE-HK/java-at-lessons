@@ -49,7 +49,7 @@ public class StringIOFindKeyWordsTest extends Suite {
 
         @Test
         public void shouldReturnNotNullForGoodFilePath() {
-            testFilePath = "src/test/java/epam/rome/byteio/testing.txt";
+            testFilePath = "src/test/java/epam/rome/stringio/testing.txt";
             assertNotNull(getKeyWordsFromFile(testFilePath));
         }
     }
@@ -57,7 +57,7 @@ public class StringIOFindKeyWordsTest extends Suite {
     public static class testFindMatchesInFile {
         @Before
         public void setUp() {
-            testFilePath = "src/test/java/epam/rome/byteio/reading.class";
+            testFilePath = "src/test/java/epam/rome/stringio/reading.class";
         }
 
         @Test
@@ -83,7 +83,7 @@ public class StringIOFindKeyWordsTest extends Suite {
     public static class testWriteFile {
         @Before
         public void setUp() {
-            testFilePath = "src/test/java/epam/rome/byteio/result.txt";
+            testFilePath = "src/test/java/epam/rome/stringio/result.txt";
         }
 
         @Test
