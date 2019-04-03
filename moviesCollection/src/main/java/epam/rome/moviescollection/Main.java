@@ -6,7 +6,6 @@ import epam.rome.moviescollection.model.FilmsSet;
 
 import java.io.*;
 
-
 public class Main {
 
     public static void main(String[] args) {
