@@ -49,7 +49,7 @@ public class ByteIOFindKeyWordsTest extends Suite {
 
         @Test
         public void shouldReturnNotNullForGoodFilePath() {
-            testFilePath = "src/main/java/epam/rome/byteio/keywords.txt";
+            testFilePath = "src/test/java/epam/rome/byteio/testing.txt";
             assertNotNull(getKeyWordsFromFile(testFilePath));
         }
     }
@@ -57,7 +57,7 @@ public class ByteIOFindKeyWordsTest extends Suite {
     public static class testFindMatchesInFile {
         @Before
         public void setUp() {
-            testFilePath = "src/main/java/epam/rome/byteio/reading.class";
+            testFilePath = "src/test/java/epam/rome/byteio/reading.class";
         }
 
         @Test
@@ -75,14 +75,15 @@ public class ByteIOFindKeyWordsTest extends Suite {
 
         @Test
         public void shouldReturnTrueForGoodInput() {
-            assertTrue(findMatchesInFile(testMap, testFilePath));
+            findMatchesInFile(testMap, testFilePath);
+            assertTrue(testMap.get("void") != 0);
         }
     }
 
     public static class testWriteFile {
         @Before
         public void setUp() {
-            testFilePath = "src/main/java/epam/rome/byteio/result.txt";
+            testFilePath = "src/test/java/epam/rome/byteio/result.txt";
         }
 
         @Test
