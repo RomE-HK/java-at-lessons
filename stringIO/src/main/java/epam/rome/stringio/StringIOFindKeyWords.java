@@ -15,7 +15,7 @@ public class StringIOFindKeyWords {
         }
 
         Map<String, Integer> map = new LinkedHashMap<>();
-        try (BufferedReader br = new BufferedReader(new FileReader(new File(filePath)))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String fileLine;
             while ((fileLine = br.readLine()) != null) {
                 map.put(fileLine, 0);
