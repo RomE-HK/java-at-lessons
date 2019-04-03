@@ -9,23 +9,18 @@ public class Actor implements Serializable {
     private int yearOfBorn;
 
     public Actor() {
-        this("John", "Smith");
+        this("John", "Smith", 1900);
     }
 
-    public Actor(String name, String surname) {
+    public Actor(String name, String surname, int yearOfBorn) {
         this.name = name;
         this.surname = surname;
-    }
-
-
-    public void setYearOfBorn(int year) {
-        yearOfBorn = year;
+        this.yearOfBorn = yearOfBorn;
     }
 
     public String getFullName() {
         return name + " " + surname;
     }
-
 
     public int getYearOfBorn() {
         return yearOfBorn;

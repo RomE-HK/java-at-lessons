@@ -15,30 +15,23 @@ public class Main {
             Film firstFilm = new Film();
             firstFilm.setGenre("History");
 
-            Actor firstActor = new Actor("Tim", "Roth");
-            firstActor.setYearOfBorn(1865);
-            Actor secondActor = new Actor("Grace", "Brown");
-            secondActor.setYearOfBorn(1868);
-
-            System.out.println(firstActor.toString());
-            System.out.println(secondActor.toString());
-
-            firstFilm.addActor(firstActor);
-            firstFilm.addActor(secondActor);
+            firstFilm.addActor("Tim", "Roth", 1865);
+            firstFilm.addActor("Grace", "Brown", 1868);
 
             myCollection.addFilm(firstFilm);
+            myCollection.addFilm("La voltige", 1980);
             myCollection.showAllFilms();
             serializeCollection(myCollection);
         } else {
             FilmsSet myCollection = deserializeCollection();
             myCollection.showAllFilms();
 
-            System.out.println("Enter the title and the year of new film:");
+            System.out.println("Enter the title of new film:");
             String newFilmTitle = inputRead();
+            System.out.println("Enter the year of new film:");
             int yearOfNewFilmTitle = Integer.parseInt(inputRead());
-            Film oneMoreFilm = new Film(newFilmTitle, yearOfNewFilmTitle);
+            myCollection.addFilm(newFilmTitle, yearOfNewFilmTitle);
 
-            myCollection.addFilm(oneMoreFilm);
             myCollection.showAllFilms();
             serializeCollection(myCollection);
         }

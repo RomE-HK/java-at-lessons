@@ -8,7 +8,7 @@ public class Film implements Serializable, Comparable<Film> {
     private String title;
     private int year;
     private String genre;
-    private ArrayList<Actor> cast = new ArrayList<>();
+    private ArrayList<Actor> filmCast = new ArrayList<>();
 
     public Film() {
         this("La voltige", 1895);
@@ -31,24 +31,29 @@ public class Film implements Serializable, Comparable<Film> {
         this.genre = genre;
     }
 
-    public void addActor(Actor actor) {
-        cast.add(actor);
+    public void addActor(Actor newActor) {
+        if (newActor != null) {
+            filmCast.add(newActor);
+        } else {
+        System.out.println("The object of Actor cannot be null");
+        }
     }
 
-    public Actor getActor(String surname) {
-        for (Actor actor : cast) {
-            if (actor.getFullName().contains(surname)) {
-                return actor;
+    public void addActor(String name, String surname, int yearOfBorn) {
+        Actor newActor = new Actor(name, surname, yearOfBorn);
+        addActor(newActor);
+    }
+
+    public void deleteActor(String name, String surname) {
+        int deletingActor = Integer.MIN_VALUE;
+        for (Actor actor : filmCast) {
+            if (actor.getFullName().contains(name) && actor.getFullName().contains(surname)) {
+                deletingActor = filmCast.indexOf(actor);
+                break;
             }
         }
-        return null;
-    }
-
-    public void deleteActor(String surname) {
-        for (Actor actor : cast) {
-            if (actor.getFullName().contains(surname)) {
-                cast.remove(actor);
-            }
+        if (deletingActor != Integer.MIN_VALUE) {
+            filmCast.remove(deletingActor);
         }
     }
 
@@ -64,24 +69,31 @@ public class Film implements Serializable, Comparable<Film> {
         return genre;
     }
 
-    public void showCast() {
-        for (Actor actor : cast) {
-            System.out.println(actor.getFullName());
+    public ArrayList<Actor> getFilmCast() {
+        return filmCast;
+    }
+
+    public String filmCastToString() {
+        StringBuilder builder = new StringBuilder();
+        for (Actor actor : filmCast) {
+            builder.append(actor.getFullName() + System.lineSeparator());
         }
+        return builder.toString();
     }
 
     public int compareTo(Film film){
+        if (title.equals(film.getTitle())) {
+            return  year - film.getYear();
+        }
         return title.compareTo(film.getTitle());
     }
 
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        builder.append(System.lineSeparator() + title + ", " + year + System.lineSeparator());
-        builder.append(genre + System.lineSeparator());
-        for (Actor actor : cast) {
-            builder.append(actor.getFullName() + System.lineSeparator());
-        } /// В принципе то же самое что showCast, надо обдумать
+        builder.append(getTitle() + ", " + getYear() + System.lineSeparator());
+        builder.append(getGenre() + System.lineSeparator());
+        builder.append(filmCastToString() + System.lineSeparator());
         return builder.toString();
     }
 }

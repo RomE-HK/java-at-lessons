@@ -8,5 +8,7 @@ public class ActorTest {
 
     @Test
     public void toStringShould() {
+        Actor testActor = new Actor("Hugh", "Laurie", 1959);
+        assertEquals("Hugh Laurie"  + System.lineSeparator() + "Age of 60, 1959", testActor.toString());
     }
 }

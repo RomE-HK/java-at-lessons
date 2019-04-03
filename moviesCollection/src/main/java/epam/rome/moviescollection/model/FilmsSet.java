@@ -10,8 +10,16 @@ public class FilmsSet implements Serializable {
         allFilms = new TreeSet<>();
     }
 
-    public void addFilm(Film film) {
-        allFilms.add(film);
+    public void addFilm(Film newFilm) {
+        if (newFilm != null) {
+            allFilms.add(newFilm);
+        } else {
+            System.out.println("The object of Film cannot be null");
+        }
+    }
+    public void addFilm(String title, int year) {
+        Film newFilm = new Film(title, year);
+        addFilm(newFilm);
     }
 
     public Film getFilm(String searchTitle, int searchYear) {
@@ -41,15 +49,7 @@ public class FilmsSet implements Serializable {
 
     public void showAllFilms() {
         for (Film film : allFilms) {
-            System.out.println(film.toString());
+            System.out.println(film.getTitle() + ", " + film.getYear());
         }
     }
-
-    /*public void showFilmCast(String title) {
-        for (Film film : allFilms) {
-            if (film.getTitle().contains(title)) {
-                film.showCast();
-            }
-        }
-    }*/
 }
