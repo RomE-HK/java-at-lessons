@@ -17,6 +17,7 @@ public class FilmsSet implements Serializable {
             System.out.println("The object of Film cannot be null");
         }
     }
+
     public void addFilm(String title, int year) {
         Film newFilm = new Film(title, year);
         addFilm(newFilm);

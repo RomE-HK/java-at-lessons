@@ -1,6 +1,5 @@
 package epam.rome.moviescollection;
 
-import epam.rome.moviescollection.model.Actor;
 import epam.rome.moviescollection.model.Film;
 import epam.rome.moviescollection.model.FilmsSet;
 

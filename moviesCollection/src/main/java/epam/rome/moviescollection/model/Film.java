@@ -10,8 +10,11 @@ public class Film implements Serializable, Comparable<Film> {
     private String genre;
     private ArrayList<Actor> filmCast = new ArrayList<>();
 
+    private static final String DEFAULT_TITLE = "Roundhay Garden Scene";
+    private static final int DEFAULT_YEAR = 1888;
+
     public Film() {
-        this("La voltige", 1895);
+        this(DEFAULT_TITLE, DEFAULT_YEAR);
     }
 
     public Film(String title, int year) {
@@ -20,14 +23,28 @@ public class Film implements Serializable, Comparable<Film> {
     }
 
     public void setTitle(String title) {
+        if (isStringEmpty(title)) {
+            System.out.println("Title was set to default because of empty string");
+            this.title = DEFAULT_TITLE;
+            return;
+        }
         this.title = title;
     }
 
     public void setYear(int year) {
+        if (year < DEFAULT_YEAR) {
+            System.out.println("Year was set to default, cause it's a year of earliest surviving motion-picture film");
+            this.year = DEFAULT_YEAR;
+            return;
+        }
         this.year = year;
     }
 
     public void setGenre(String genre) {
+        if (isStringEmpty(genre)) {
+            System.out.println("Cannot set the empty genre");
+            return;
+        }
         this.genre = genre;
     }
 
@@ -40,11 +57,18 @@ public class Film implements Serializable, Comparable<Film> {
     }
 
     public void addActor(String name, String surname, int yearOfBorn) {
-        Actor newActor = new Actor(name, surname, yearOfBorn);
-        addActor(newActor);
+        if (isNameSurnameEmpty(name, surname)) {
+            System.out.println("Actor wasn't added!");
+            return;
+        }
+        addActor(new Actor(name, surname, yearOfBorn));
     }
 
     public void deleteActor(String name, String surname) {
+        if (isNameSurnameEmpty(name, surname)) {
+            System.out.println("Actor wasn't deleted!");
+            return;
+        }
         int deletingActor = Integer.MIN_VALUE;
         for (Actor actor : filmCast) {
             if (actor.getFullName().contains(name) && actor.getFullName().contains(surname)) {
@@ -83,7 +107,7 @@ public class Film implements Serializable, Comparable<Film> {
 
     public int compareTo(Film film){
         if (title.equals(film.getTitle())) {
-            return  year - film.getYear();
+            return year - film.getYear();
         }
         return title.compareTo(film.getTitle());
     }
@@ -95,6 +119,18 @@ public class Film implements Serializable, Comparable<Film> {
         builder.append(getGenre() + System.lineSeparator());
         builder.append(filmCastToString() + System.lineSeparator());
         return builder.toString();
+    }
+
+    private boolean isStringEmpty(String value){
+        return value == null || "".equals(value.trim());
+    }
+
+    private boolean isNameSurnameEmpty(String name, String surname) {
+        if (isStringEmpty(name) || isStringEmpty(surname)) {
+            System.out.println("Name or surname is empty");
+            return true;
+        }
+        return false;
     }
 }
 
