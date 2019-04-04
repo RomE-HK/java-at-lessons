@@ -2,16 +2,19 @@ package epam.rome.moviescollection.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
+
+import static epam.rome.moviescollection.model.Tools.*;
 
 
 public class Film implements Serializable, Comparable<Film> {
     private String title;
     private int year;
     private String genre;
-    private ArrayList<Actor> filmCast = new ArrayList<>();
+    private List<Actor> filmCast;
 
-    private static final String DEFAULT_TITLE = "Roundhay Garden Scene";
-    private static final int DEFAULT_YEAR = 1888;
+    public static final String DEFAULT_TITLE = "Roundhay Garden Scene";
+    public static final int DEFAULT_YEAR = 1888;
 
     public Film() {
         this(DEFAULT_TITLE, DEFAULT_YEAR);
@@ -20,6 +23,7 @@ public class Film implements Serializable, Comparable<Film> {
     public Film(String title, int year) {
         setTitle(title);
         setYear(year);
+        filmCast = new ArrayList<>();
     }
 
     public void setTitle(String title) {
@@ -32,7 +36,7 @@ public class Film implements Serializable, Comparable<Film> {
     }
 
     public void setYear(int year) {
-        if (year < DEFAULT_YEAR) {
+        if (isFilmYearTooSmall(year)) {
             System.out.println("Year was set to default, cause it's a year of earliest surviving motion-picture film");
             this.year = DEFAULT_YEAR;
             return;
@@ -49,11 +53,11 @@ public class Film implements Serializable, Comparable<Film> {
     }
 
     public void addActor(Actor newActor) {
-        if (newActor != null) {
-            filmCast.add(newActor);
-        } else {
-        System.out.println("The object of Actor cannot be null");
+        if (newActor == null) {
+            System.out.println("The object of Actor cannot be null");
+            return;
         }
+        filmCast.add(newActor);
     }
 
     public void addActor(String name, String surname, int yearOfBorn) {
@@ -93,7 +97,7 @@ public class Film implements Serializable, Comparable<Film> {
         return genre;
     }
 
-    public ArrayList<Actor> getFilmCast() {
+    public List<Actor> getFilmCast() {
         return filmCast;
     }
 
@@ -117,20 +121,13 @@ public class Film implements Serializable, Comparable<Film> {
         StringBuilder builder = new StringBuilder();
         builder.append(getTitle() + ", " + getYear() + System.lineSeparator());
         builder.append(getGenre() + System.lineSeparator());
-        builder.append(filmCastToString() + System.lineSeparator());
+        //builder.append(filmCastToString() + System.lineSeparator());
         return builder.toString();
     }
 
-    private boolean isStringEmpty(String value){
-        return value == null || "".equals(value.trim());
-    }
+    protected static boolean isFilmYearTooSmall(int year) {
+        return year < DEFAULT_YEAR;
 
-    private boolean isNameSurnameEmpty(String name, String surname) {
-        if (isStringEmpty(name) || isStringEmpty(surname)) {
-            System.out.println("Name or surname is empty");
-            return true;
-        }
-        return false;
     }
 }
 

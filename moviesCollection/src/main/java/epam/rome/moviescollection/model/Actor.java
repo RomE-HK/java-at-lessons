@@ -3,6 +3,8 @@ package epam.rome.moviescollection.model;
 import java.io.Serializable;
 import java.util.Calendar;
 
+import static epam.rome.moviescollection.model.Tools.isStringEmpty;
+
 public class Actor implements Serializable {
     private String name;
     private String surname;
@@ -72,9 +74,5 @@ public class Actor implements Serializable {
         int ages = Calendar.getInstance().get(Calendar.YEAR) - getYearOfBorn();
         builder.append("Age of " + ages).append(", " + getYearOfBorn());
         return builder.toString();
-    }
-
-    private boolean isStringEmpty(String value){
-        return value == null || "".equals(value.trim());
     }
 }

@@ -148,7 +148,7 @@ public class FilmTest {
         StringBuilder builder = new StringBuilder();
         builder.append("Jeeves and Wooster, 1990" + System.lineSeparator());
         builder.append("Comedy" + System.lineSeparator());
-        builder.append("Hugh Laurie" + System.lineSeparator() + System.lineSeparator());
+        //builder.append("Hugh Laurie" + System.lineSeparator() + System.lineSeparator());
         assertEquals(builder.toString(), testFilm.toString());
     }
 }
