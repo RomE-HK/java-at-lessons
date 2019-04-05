@@ -2,7 +2,6 @@ package epam.rome.moviescollection.model;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -82,7 +81,7 @@ public class FilmTest {
     @Test
     public void shouldAddDefaultActorTest() {
         Actor newActor = new Actor();
-        testFilm.addActor(newActor);
+        testFilm.addActor(newActor);        //ВОПРОС: НУЖНЫ ЛИ ТЕСТЫ ДЛЯ КОНСТРУКТОРА С ПАРАМЕТРАМИ?
         assertTrue(testFilm.getFilmCast().contains(newActor));
     }
 
@@ -91,6 +90,20 @@ public class FilmTest {
         Actor newActor = new Actor("Stephen", "Fry", 1957);
         testFilm.addActor(newActor);
         assertTrue(testFilm.getFilmCast().contains(newActor));
+    }
+
+    @Test
+    public void shouldNotGetActorEmptyTest() {
+        assertNull(testFilm.getActor(null, null));
+        assertNull(testFilm.getActor("", ""));
+        assertNull(testFilm.getActor("a", null));
+        assertNull(testFilm.getActor(null, "b"));
+        assertNull(testFilm.getActor("a", "b"));
+    }
+
+    @Test
+    public void shouldGetActorProperlyTest() {
+        assertEquals(testActor, testFilm.getActor("Hugh", "Laurie"));
     }
 
     @Test

@@ -70,7 +70,7 @@ public class Actor implements Serializable {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        builder.append(getFullName() + System.lineSeparator());
+        builder.append(getFullName() + System.lineSeparator()); // ВОПРОС: ВЫЗОВ МЕТОДА ИЛИ ОБРАЩЕНИЕ К ПОЛЮ
         int ages = Calendar.getInstance().get(Calendar.YEAR) - getYearOfBorn();
         builder.append("Age of " + ages).append(", " + getYearOfBorn());
         return builder.toString();

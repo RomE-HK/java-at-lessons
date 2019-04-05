@@ -61,28 +61,36 @@ public class Film implements Serializable, Comparable<Film> {
     }
 
     public void addActor(String name, String surname, int yearOfBorn) {
-        if (isNameSurnameEmpty(name, surname)) {
+        /* if (isNameSurnameEmpty(name, surname)) {
             System.out.println("Actor wasn't added!");
-            return;
-        }
+            return;     //ВОПРОС: ЕЩЁ ПРОВЕРКА НУЖНА, ВЕДЬ ПРИ СОЗДАНИИ АКТЁРА ОНА ПРОИСХОДИТ И ТАК?
+        } */
         addActor(new Actor(name, surname, yearOfBorn));
+    }
+
+    public Actor getActor(String searchName, String searchSurname) {
+        if (!isNameSurnameEmpty(searchName, searchSurname)) {
+            for (Actor actor : filmCast) {
+                if (actor.getFullName().contains(searchName) && actor.getFullName().contains(searchSurname)) {
+                    return actor;
+                }
+            }
+        }
+        System.out.println("There is no match for such actor. Null returned!");
+        return null;
     }
 
     public void deleteActor(String name, String surname) {
         if (isNameSurnameEmpty(name, surname)) {
+            System.out.println("There is no match for this title and year");
+            return;
+        }
+        Actor foundActor = getActor(name, surname);
+        if (foundActor == null) {
             System.out.println("Actor wasn't deleted!");
             return;
         }
-        int deletingActor = Integer.MIN_VALUE;
-        for (Actor actor : filmCast) {
-            if (actor.getFullName().contains(name) && actor.getFullName().contains(surname)) {
-                deletingActor = filmCast.indexOf(actor);
-                break;
-            }
-        }
-        if (deletingActor != Integer.MIN_VALUE) {
-            filmCast.remove(deletingActor);
-        }
+        filmCast.remove(foundActor);
     }
 
     public String getTitle() {
@@ -125,9 +133,6 @@ public class Film implements Serializable, Comparable<Film> {
         return builder.toString();
     }
 
-    protected static boolean isFilmYearTooSmall(int year) {
-        return year < DEFAULT_YEAR;
 
-    }
 }
 
