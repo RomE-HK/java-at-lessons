@@ -26,6 +26,8 @@ public class FilmsSetTest {
     @After
     public void cleanUp() {
         testCollection = null;
+        testFilm = null;
+        testActor = null;
     }
 
     @Test

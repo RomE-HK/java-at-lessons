@@ -1,13 +1,13 @@
 package epam.rome.moviescollection.model;
 
-class Tools {
+public class Tools {
     private Tools() {}
 
-    static boolean isStringEmpty(String value){
+    public static boolean isStringEmpty(String value){
         return value == null || "".equals(value.trim());
     }
 
-    static boolean isNameSurnameEmpty(String name, String surname) {
+    public static boolean isNameSurnameEmpty(String name, String surname) {
         if (isStringEmpty(surname)) {
             System.out.println("Surname cannot be empty");
             return true;
@@ -19,11 +19,11 @@ class Tools {
         return false;
     }
 
-    static boolean isFilmYearTooSmall(int year) {
+    public static boolean isFilmYearTooSmall(int year) {
         return year < Film.DEFAULT_YEAR;
     }
 
-    static boolean isTitleAndYearCorrect(String title, int year) {
+    public static boolean isTitleAndYearCorrect(String title, int year) {
         if (isStringEmpty(title)) {
             System.out.println("Title cannot be empty");
             return false;
