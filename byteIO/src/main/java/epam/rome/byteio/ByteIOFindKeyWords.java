@@ -23,10 +23,10 @@ public class ByteIOFindKeyWords {
             while ((fileLine = br.readLine()) != null) {
                 map.put(fileLine, 0);
             }
+            System.out.println("Keywords successfully got");
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
-        System.out.println("Keywords successfully got");
         return map;
     }
 
@@ -42,6 +42,7 @@ public class ByteIOFindKeyWords {
             }
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
+            return false;
         }
         System.out.println("Matches successfully found");
         return true;
@@ -62,6 +63,7 @@ public class ByteIOFindKeyWords {
             }
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
+            return false;
         }
         System.out.println("Matches successfully wrote to file");
         return true;

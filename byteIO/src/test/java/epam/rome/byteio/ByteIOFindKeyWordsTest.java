@@ -24,7 +24,7 @@ public class ByteIOFindKeyWordsTest extends Suite {
     }
 
     private static Map<String, Integer> testMap;
-    private static String testFilePath;
+    private static String testClassFilePath;
 
     @BeforeClass
     public static void setUpClass() {
@@ -36,7 +36,7 @@ public class ByteIOFindKeyWordsTest extends Suite {
     @AfterClass
     public static void cleanUp() {
         testMap = null;
-        testFilePath = null;
+        testClassFilePath = null;
     }
 
     public static class testGetKeyWordsFromFile {
@@ -49,15 +49,17 @@ public class ByteIOFindKeyWordsTest extends Suite {
 
         @Test
         public void shouldReturnNotNullForGoodFilePath() {
-            testFilePath = "src/test/java/epam/rome/byteio/testing.txt";
-            assertNotNull(getKeyWordsFromFile(testFilePath));
+            testClassFilePath = "src/test/java/epam/rome/byteio/testing.txt";
+            assertNotNull(getKeyWordsFromFile(testClassFilePath));
         }
     }
 
     public static class testFindMatchesInFile {
         @Before
         public void setUp() {
-            testFilePath = "src/test/java/epam/rome/byteio/reading.class";
+            testClassFilePath = "src/test/java/epam/rome/byteio/reading.class";
+            testMap.put("goto", 0);
+            testMap.put("void", 0);
         }
 
         @Test
@@ -69,32 +71,39 @@ public class ByteIOFindKeyWordsTest extends Suite {
 
         @Test
         public void shouldReturnFalseForEmptyMap() {
-            assertFalse(findMatchesInFile(null, testFilePath));
-            assertFalse(findMatchesInFile(new HashMap<>(), testFilePath));
+            assertFalse(findMatchesInFile(null, testClassFilePath));
+            assertFalse(findMatchesInFile(new HashMap<>(), testClassFilePath));
         }
 
         @Test
-        public void shouldReturnTrueForGoodInput() {
-            findMatchesInFile(testMap, testFilePath);
-            assertTrue(testMap.get("void") != 0);
+        public void shouldNotCountGluedMatches() {
+            String corruptedClassFilePath = "src/test/java/epam/rome/byteio/corrupted.class";
+            findMatchesInFile(testMap, corruptedClassFilePath);
+            assertEquals((int)testMap.get("void"), 1);
+        }
+
+        @Test
+        public void shouldEqualsForGoodInput() {
+            findMatchesInFile(testMap, testClassFilePath);
+            assertEquals((int)testMap.get("void"), 8);
         }
     }
 
     public static class testWriteFile {
         @Before
         public void setUp() {
-            testFilePath = "src/test/java/epam/rome/byteio/result.txt";
+            testClassFilePath = "src/test/java/epam/rome/byteio/result.txt";
         }
 
         @Test
         public void shouldReturnFalseForEmptyMap() {
-            assertFalse(writeFile(null, testFilePath));
-            assertFalse(writeFile(new HashMap<>(), testFilePath));
+            assertFalse(writeFile(null, testClassFilePath));
+            assertFalse(writeFile(new HashMap<>(), testClassFilePath));
         }
 
         @Test
         public void shouldReturnTrueForGoodInput() {
-            assertTrue(writeFile(testMap, testFilePath));
+            assertTrue(writeFile(testMap, testClassFilePath));
         }
     }
 

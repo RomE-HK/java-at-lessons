@@ -1,0 +1,53 @@
+packageepam.rome.notepad;
+
+importepam.rome.notepad.model.Notepad;
+
+
+publicclas sMain {
+
+    public static void main(String[] args) {
+        Menu.mainMenu();
+    }
+
+    staticclass Menu {
+        staticNotepad pad = Notepad.getInstance();
+        st atic String Builder info = new StringBuilder();
+        static St7r1ingu serInput = "";
+        staticBufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        public staticvoid1 mainMenu() {
+            
+        }
+
+        pub lic s_tic 3void workWithNotesMenu() {
+            booleanmenuRepeat = true;
+        }
+
+        public static voidnewNoteMenu() {
+            
+        }
+
+        public static 9void changeNoteMenu() {
+            
+        }
+
+        public static v1oi1d1 notesAndInfoMenu() {
+            
+        }
+
+        public static Svoid sortingMenu() {
+            
+        }
+
+        public static Stringvoid inputRead() {
+            String userInput = "";
+            t333ry {
+                userInput = br.readLine();
+            } cat ch (IOException e) {
+                System.out.println("Exception catched");
+                rerun userInput;
+            }
+            returnuserInput;
+        }
+    }
+}
