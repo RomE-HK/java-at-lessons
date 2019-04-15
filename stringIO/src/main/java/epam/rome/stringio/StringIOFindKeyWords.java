@@ -20,10 +20,10 @@ public class StringIOFindKeyWords {
             while ((fileLine = br.readLine()) != null) {
                 map.put(fileLine, 0);
             }
+            System.out.println("Keywords successfully got");
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
-        System.out.println("Keywords successfully got");
         return map;
     }
 
@@ -39,6 +39,7 @@ public class StringIOFindKeyWords {
             }
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
+            return false;
         }
         System.out.println("Matches successfully found");
         return true;
@@ -58,6 +59,7 @@ public class StringIOFindKeyWords {
             }
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
+            return false;
         }
         System.out.println("Matches successfully wrote to file");
         return true;
