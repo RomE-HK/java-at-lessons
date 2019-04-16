@@ -16,10 +16,6 @@ public class Film implements Serializable, Comparable<Film> {
     public static final String DEFAULT_TITLE = "Roundhay Garden Scene";
     public static final int DEFAULT_YEAR = 1888;
 
-    public Film() {
-        this(DEFAULT_TITLE, DEFAULT_YEAR);
-    }
-
     public Film(String title, int year) {
         setTitle(title);
         setYear(year);
@@ -71,7 +67,7 @@ public class Film implements Serializable, Comparable<Film> {
     public Actor getActor(String searchName, String searchSurname) {
         if (!isNameSurnameEmpty(searchName, searchSurname)) {
             for (Actor actor : filmCast) {
-                if (actor.getFullName().contains(searchName) && actor.getFullName().contains(searchSurname)) {
+                if (actor.getName().equals(searchName) && actor.getSurname().equals(searchSurname)) {
                     return actor;
                 }
             }
@@ -80,17 +76,18 @@ public class Film implements Serializable, Comparable<Film> {
         return null;
     }
 
-    public void deleteActor(String name, String surname) {
+    public boolean deleteActor(String name, String surname) {
         if (isNameSurnameEmpty(name, surname)) {
-            System.out.println("There is no match for this title and year");
-            return;
+            System.out.println("Actor wasn't deleted!");
+            return false;
         }
         Actor foundActor = getActor(name, surname);
         if (foundActor == null) {
             System.out.println("Actor wasn't deleted!");
-            return;
+            return false;
         }
         filmCast.remove(foundActor);
+        return true;
     }
 
     public String getTitle() {
@@ -129,7 +126,6 @@ public class Film implements Serializable, Comparable<Film> {
         StringBuilder builder = new StringBuilder();
         builder.append(getTitle() + ", " + getYear() + System.lineSeparator());
         builder.append(getGenre() + System.lineSeparator());
-        //builder.append(filmCastToString() + System.lineSeparator());
         return builder.toString();
     }
 

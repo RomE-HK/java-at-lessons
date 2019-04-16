@@ -12,7 +12,7 @@ public class ActorTest {
 
     @Before
     public void setUp() {
-        testActor = new Actor();
+        testActor = new Actor("Raul", "Julia", 1940);
     }
 
     @After
@@ -42,7 +42,7 @@ public class ActorTest {
         testActor.setSurname(newSurname);
         assertNotEquals(newSurname, testActor.getSurname());
         testActor.setSurname(null);
-        assertNotEquals(null, testActor.getSurname());
+        assertNotNull(testActor.getSurname());
     }
 
     @Test

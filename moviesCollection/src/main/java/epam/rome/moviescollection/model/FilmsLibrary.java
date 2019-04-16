@@ -6,10 +6,10 @@ import java.util.TreeSet;
 
 import static epam.rome.moviescollection.model.Tools.*;
 
-public class FilmsSet implements Serializable {
+public class FilmsLibrary implements Serializable {
     private Set<Film> allFilms;
 
-    public FilmsSet() {
+    public FilmsLibrary() {
         allFilms = new TreeSet<>();
     }
 
@@ -41,25 +41,26 @@ public class FilmsSet implements Serializable {
         return null;
     }
 
-    public void deleteFilm(String title, int year) {
+    public boolean deleteFilm(String title, int year) {
         if (!isTitleAndYearCorrect(title, year)) {
-            System.out.println("There is no match for this title and year");
-            return;
+            System.out.println("Film wasn't deleted!");
+            return false;
         }
         Film foundFilm = getFilm(title, year);
         if (foundFilm == null) {
-            System.out.println("Film wasn't deleted!");
-            return;
+            System.out.println("There is no match for this title and year. Film wasn't deleted!");
+            return false;
         }
         allFilms.remove(foundFilm);
+        return true;
     }
 
-    public FilmsSet allFilmsByActor(String searchName, String searchSurname) {
+    public FilmsLibrary allFilmsByActor(String searchName, String searchSurname) {
         if (isNameSurnameEmpty(searchName, searchSurname)) {
             System.out.println("Null returned!");
             return null;
         }
-        FilmsSet playInFilms = new FilmsSet();
+        FilmsLibrary playInFilms = new FilmsLibrary();
         for (Film film : allFilms) {
             if (film.getActor(searchName, searchSurname) != null) {
                 playInFilms.addFilm(film);

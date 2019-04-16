@@ -1,14 +1,14 @@
 package epam.rome.moviescollection;
 
 import epam.rome.moviescollection.model.Film;
-import epam.rome.moviescollection.model.FilmsSet;
+import epam.rome.moviescollection.model.FilmsLibrary;
 
 import java.io.*;
 
 import static epam.rome.moviescollection.model.Tools.isStringEmpty;
 
 public class Main {
-    static FilmsSet myCollection;
+    static FilmsLibrary myCollection;
     static StringBuilder info = new StringBuilder();
     static String userInput = "";
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -23,7 +23,7 @@ public class Main {
 
         if (myCollection.getFilmCollection().size() == 0) {
 
-            Film firstFilm = new Film();
+            Film firstFilm = new Film("Troy", 2004);
             firstFilm.setGenre("History");
 
             firstFilm.addActor("Tim", "Roth", 1865);
@@ -90,11 +90,11 @@ public class Main {
 
     }
 
-    public static FilmsSet newCollection() {
-        return new FilmsSet();
+    public static FilmsLibrary newCollection() {
+        return new FilmsLibrary();
     }
 
-    public static FilmsSet loadCollection(String filename) {
+    public static FilmsLibrary loadCollection(String filename) {
         if (new File(filename + ".dat").exists()) {
             return myCollection = deserializeCollection(filename);
         }
@@ -132,28 +132,26 @@ public class Main {
         return userInput;
     }
 
-    public static void serializeCollection(FilmsSet collection, String filename) {
-        if (isStringEmpty(filename))
-        {
+    public static void serializeCollection(FilmsLibrary collection, String filename) {
+        if (isStringEmpty(filename)) {
             System.out.println("Filename cannot be empty. Operation canceled");
             return;
         }
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filename + ".dat"))) {
             oos.writeObject(collection);
         } catch (Exception ex) {
-
             System.out.println(ex.getMessage());
         }
     }
 
-    public static FilmsSet deserializeCollection(String filename) {
+    public static FilmsLibrary deserializeCollection(String filename) {
         if (isStringEmpty(filename))
         {
             System.out.println("Filename cannot be empty. Null returned");
             return null;
         }
         try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filename + ".dat"))) {
-            return (FilmsSet)ois.readObject();
+            return (FilmsLibrary)ois.readObject();
         }
         catch(Exception ex){
             System.out.println(ex.getMessage());

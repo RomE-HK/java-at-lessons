@@ -6,15 +6,15 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class FilmsSetTest {
+public class FilmsLibraryTest {
 
-    private FilmsSet testCollection;
+    private FilmsLibrary testCollection;
     private Film testFilm;
     private Actor testActor;
 
     @Before
     public void setUp() {
-        testCollection = new FilmsSet();
+        testCollection = new FilmsLibrary();
         testFilm = new Film("Jeeves and Wooster", 1990);
         testActor = new Actor("Hugh", "Laurie" , 1959);
 
@@ -39,7 +39,7 @@ public class FilmsSetTest {
 
     @Test
     public void shouldAddDefaultFilmTest() {
-        Film newFilm = new Film();
+        Film newFilm = new Film("Interstate 60", 2002);
         testCollection.addFilm(newFilm);
         assertTrue(testCollection.getFilmCollection().contains(newFilm));
     }
@@ -72,27 +72,21 @@ public class FilmsSetTest {
 
     @Test
     public void shouldNotDeleteFilmNullTest() {
-        int sizeBefore = testCollection.getFilmCollection().size();
-        testCollection.deleteFilm(null, 2000);
-        assertEquals(sizeBefore, testCollection.getFilmCollection().size());
+        assertFalse(testCollection.deleteFilm(null, 2000));
     }
 
     @Test
     public void shouldNotDeleteFilmMissingTest() {
-        int sizeBefore = testCollection.getFilmCollection().size();
-        testCollection.deleteFilm("House M.D.", 2000);
-        assertEquals(sizeBefore, testCollection.getFilmCollection().size());
+        assertFalse(testCollection.deleteFilm("House M.D.", 2000));
     }
 
     @Test
     public void shouldDeleteFilmProperlyTest() {
-        int sizeBefore = testCollection.getFilmCollection().size();
-        testCollection.deleteFilm("Jeeves and Wooster", 1990);
-        assertEquals(sizeBefore - 1, testCollection.getFilmCollection().size());
+        assertTrue(testCollection.deleteFilm("Jeeves and Wooster", 1990));
     }
 
     @Test
-    public void allFilmsByActor() {
+    public void allFilmsByActorTest() {
         Film newFilm = new Film("House M.D.", 2004);
         newFilm.addActor("Hugh", "Laurie", 1959);
         testCollection.addFilm(newFilm);
@@ -102,7 +96,7 @@ public class FilmsSetTest {
         testCollection.addFilm(anotherFilm);
 
         int sizeOfOriginalCollection = testCollection.getFilmCollection().size();
-        FilmsSet filteredCollection = testCollection.allFilmsByActor("Hugh", "Laurie");
+        FilmsLibrary filteredCollection = testCollection.allFilmsByActor("Hugh", "Laurie");
         int sizeOfFilteredCollection = filteredCollection.getFilmCollection().size();
 
         assertNotEquals(sizeOfOriginalCollection, sizeOfFilteredCollection);

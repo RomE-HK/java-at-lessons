@@ -80,8 +80,8 @@ public class FilmTest {
 
     @Test
     public void shouldAddDefaultActorTest() {
-        Actor newActor = new Actor();
-        testFilm.addActor(newActor);        //ВОПРОС: НУЖНЫ ЛИ ТЕСТЫ ДЛЯ КОНСТРУКТОРА С ПАРАМЕТРАМИ?
+        Actor newActor = new Actor("Christopher", "Lloyd", 1938);
+        testFilm.addActor(newActor);
         assertTrue(testFilm.getFilmCast().contains(newActor));
     }
 
@@ -108,23 +108,17 @@ public class FilmTest {
 
     @Test
     public void shouldNotDeleteActorNullTest() {
-        int sizeBefore = testFilm.getFilmCast().size();
-        testFilm.deleteActor(null, null);
-        assertEquals(sizeBefore, testFilm.getFilmCast().size());
+        assertFalse(testFilm.deleteActor(null, null));
     }
 
     @Test
     public void shouldNotDeleteActorMissingTest() {
-        int sizeBefore = testFilm.getFilmCast().size();
-        testFilm.deleteActor("Stephen", "Fry");
-        assertEquals(sizeBefore, testFilm.getFilmCast().size());
+        assertFalse(testFilm.deleteActor("Stephen", "Fry"));
     }
 
     @Test
     public void shouldDeleteActorProperlyTest() {
-        int sizeBefore = testFilm.getFilmCast().size();
-        testFilm.deleteActor("Hugh", "Laurie");
-        assertEquals(sizeBefore - 1, testFilm.getFilmCast().size());
+        assertTrue(testFilm.deleteActor("Hugh", "Laurie"));
     }
 
     @Test

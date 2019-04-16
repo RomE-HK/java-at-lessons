@@ -14,10 +14,6 @@ public class Actor implements Serializable {
     private static final String DEFAULT_SURNAME = "Smith";
     private static final int DEFAULT_YEAR_OF_BORN = 1700;
 
-    public Actor() {
-        this(DEFAULT_NAME, DEFAULT_SURNAME, DEFAULT_YEAR_OF_BORN);
-    }
-
     public Actor(String name, String surname, int yearOfBorn) {
         setName(name);
         setSurname(surname);
