@@ -5,9 +5,9 @@ import java.util.Map;
 public class Main {
 
     public static void main(String[] args) {
-        String keywordsFilePath = "src/main/java/epam/rome/stringio/keywords.txt";
-        String readingFilePath = "src/main/java/epam/rome/stringio/reading.class";
-        String writingFilePath = "src/main/java/epam/rome/stringio/result.txt";
+        String keywordsFilePath = "keywords.txt";
+        String readingFilePath = "reading.class";
+        String writingFilePath = "result.txt";
 
         Map<String, Integer> keywordsMap = StringIOFindKeyWords.getKeyWordsFromFile(keywordsFilePath);
         StringIOFindKeyWords.findMatchesInFile(keywordsMap, readingFilePath);

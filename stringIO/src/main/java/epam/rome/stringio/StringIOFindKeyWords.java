@@ -20,10 +20,10 @@ public class StringIOFindKeyWords {
             while ((fileLine = br.readLine()) != null) {
                 map.put(fileLine, 0);
             }
-            System.out.println("Keywords successfully got");
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
+        System.out.println("Keywords successfully got");
         return map;
     }
 
@@ -39,7 +39,6 @@ public class StringIOFindKeyWords {
             }
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
-            return false;
         }
         System.out.println("Matches successfully found");
         return true;
@@ -59,7 +58,6 @@ public class StringIOFindKeyWords {
             }
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
-            return false;
         }
         System.out.println("Matches successfully wrote to file");
         return true;
@@ -76,9 +74,9 @@ public class StringIOFindKeyWords {
     }
 
     private static void findMatchesInString(Map<String, Integer> map, String str) {
-        String[] words = str.split(" ");
+        String[] words = str.trim().split("\\s+|\\t|\\;|\\(|\\)|\\{|\\}|\\[|\\]");
         for (String subStr : words) {
-            if (map.containsKey(subStr)) {
+            if (!isStringEmpty(subStr) && map.containsKey(subStr)) {
                 map.put(subStr, map.get(subStr) + 1);
             }
         }

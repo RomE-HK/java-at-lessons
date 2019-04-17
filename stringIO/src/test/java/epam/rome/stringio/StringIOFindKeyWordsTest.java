@@ -24,13 +24,11 @@ public class StringIOFindKeyWordsTest extends Suite {
     }
 
     private static Map<String, Integer> testMap;
-    private static String testClassFilePath;
+    private static String testFilePath;
 
     @BeforeClass
     public static void setUpClass() {
         testMap = new HashMap<>();
-        testMap.put("goto", 0);
-        testMap.put("void", 0);
     }
 
     @AfterClass
@@ -49,16 +47,18 @@ public class StringIOFindKeyWordsTest extends Suite {
 
         @Test
         public void shouldReturnNotNullForGoodFilePath() {
-            testClassFilePath = "src/test/java/epam/rome/stringio/testing.txt";
-            assertNotNull(getKeyWordsFromFile(testClassFilePath));
+            testFilePath = "test_keywords.txt";
+            assertNotNull(getKeyWordsFromFile(testFilePath));
         }
     }
 
     public static class testFindMatchesInFile {
         @Before
         public void setUp() {
-            testClassFilePath = "src/test/java/epam/rome/stringio/reading.class";
-            testMap.put("goto", 0);
+            testFilePath = "reading.class";
+            testMap.put("break", 0);
+            testMap.put("continue", 0);
+            testMap.put("else", 0);
             testMap.put("void", 0);
         }
 
@@ -71,39 +71,39 @@ public class StringIOFindKeyWordsTest extends Suite {
 
         @Test
         public void shouldReturnFalseForEmptyMap() {
-            assertFalse(findMatchesInFile(null, testClassFilePath));
-            assertFalse(findMatchesInFile(new HashMap<>(), testClassFilePath));
+            assertFalse(findMatchesInFile(null, testFilePath));
+            assertFalse(findMatchesInFile(new HashMap<>(), testFilePath));
         }
 
         @Test
-        public void shouldNotCountGluedMatches() {
-            String corruptedClassFilePath = "src/test/java/epam/rome/stringio/corrupted.class";
-            findMatchesInFile(testMap, corruptedClassFilePath);
-            assertEquals((int)testMap.get("void"), 1);
+        public void shouldReturnTrueForGluedWords() {
+            findMatchesInFile(testMap, testFilePath);
+            assertTrue(testMap.get("break") != 0);
+            assertTrue(testMap.get("continue") != 0);
         }
 
         @Test
-        public void shouldEqualsForGoodInput() {
-            findMatchesInFile(testMap, testClassFilePath);
-            assertEquals((int)testMap.get("void"), 8);
+        public void shouldReturnTrueForGoodInput() {
+            findMatchesInFile(testMap, testFilePath);
+            assertTrue(testMap.get("void") != 0);
         }
     }
 
     public static class testWriteFile {
         @Before
         public void setUp() {
-            testClassFilePath = "src/test/java/epam/rome/stringio/result.txt";
+            testFilePath = "result.txt";
         }
 
         @Test
         public void shouldReturnFalseForEmptyMap() {
-            assertFalse(writeFile(null, testClassFilePath));
-            assertFalse(writeFile(new HashMap<>(), testClassFilePath));
+            assertFalse(writeFile(null, testFilePath));
+            assertFalse(writeFile(new HashMap<>(), testFilePath));
         }
 
         @Test
         public void shouldReturnTrueForGoodInput() {
-            assertTrue(writeFile(testMap, testClassFilePath));
+            assertTrue(writeFile(testMap, testFilePath));
         }
     }
 
