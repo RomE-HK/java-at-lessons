@@ -24,7 +24,7 @@ public class StringIOFindKeyWordsTest extends Suite {
     }
 
     private static Map<String, Integer> testMap;
-    private static String testFilePath;
+    private static String testClassFilePath;
 
     @BeforeClass
     public static void setUpClass() {
@@ -47,15 +47,15 @@ public class StringIOFindKeyWordsTest extends Suite {
 
         @Test
         public void shouldReturnNotNullForGoodFilePath() {
-            testFilePath = "test_keywords.txt";
-            assertNotNull(getKeyWordsFromFile(testFilePath));
+            testClassFilePath = "test_keywords.txt";
+            assertNotNull(getKeyWordsFromFile(testClassFilePath));
         }
     }
 
     public static class testFindMatchesInFile {
         @Before
         public void setUp() {
-            testFilePath = "reading.class";
+            testClassFilePath = "reading.class";
             testMap.put("break", 0);
             testMap.put("continue", 0);
             testMap.put("else", 0);
@@ -71,20 +71,20 @@ public class StringIOFindKeyWordsTest extends Suite {
 
         @Test
         public void shouldReturnFalseForEmptyMap() {
-            assertFalse(findMatchesInFile(null, testFilePath));
-            assertFalse(findMatchesInFile(new HashMap<>(), testFilePath));
+            assertFalse(findMatchesInFile(null, testClassFilePath));
+            assertFalse(findMatchesInFile(new HashMap<>(), testClassFilePath));
         }
 
         @Test
         public void shouldReturnTrueForGluedWords() {
-            findMatchesInFile(testMap, testFilePath);
+            findMatchesInFile(testMap, testClassFilePath);
             assertTrue(testMap.get("break") != 0);
             assertTrue(testMap.get("continue") != 0);
         }
 
         @Test
         public void shouldReturnTrueForGoodInput() {
-            findMatchesInFile(testMap, testFilePath);
+            findMatchesInFile(testMap, testClassFilePath);
             assertTrue(testMap.get("void") != 0);
         }
     }
@@ -92,18 +92,19 @@ public class StringIOFindKeyWordsTest extends Suite {
     public static class testWriteFile {
         @Before
         public void setUp() {
-            testFilePath = "result.txt";
+            testClassFilePath = "test_result.txt";
         }
 
         @Test
         public void shouldReturnFalseForEmptyMap() {
-            assertFalse(writeFile(null, testFilePath));
-            assertFalse(writeFile(new HashMap<>(), testFilePath));
+            assertFalse(writeFile(null, testClassFilePath));
+            assertFalse(writeFile(new HashMap<>(), testClassFilePath));
         }
 
         @Test
         public void shouldReturnTrueForGoodInput() {
-            assertTrue(writeFile(testMap, testFilePath));
+            testMap.put("break", 1);
+            assertTrue(writeFile(testMap, testClassFilePath));
         }
     }
 
