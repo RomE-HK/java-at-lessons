@@ -80,9 +80,9 @@ public class ByteIOFindKeyWords {
     }
 
     private static void findMatchesInString(Map<String, Integer> map, String str) {
-        String[] words = str.split(" ");
+        String[] words = str.trim().split("\\s+|\\t|\\;|\\(|\\)|\\{|\\}|\\[|\\]");
         for (String subStr : words) {
-            if (map.containsKey(subStr)) {
+            if (!isStringEmpty(subStr) && map.containsKey(subStr)) {
                 map.put(subStr, map.get(subStr) + 1);
             }
         }

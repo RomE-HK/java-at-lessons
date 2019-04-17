@@ -100,7 +100,7 @@ public class Main {
 
                 info = new StringBuilder();
                 info.append("\nChoose wisely:\n");
-                info.append("1 - Add new one\n");
+                info.append("1 - Add note\n");
                 info.append("2 - Replace old one\n");
                 info.append("0 - Go back\n");
 
