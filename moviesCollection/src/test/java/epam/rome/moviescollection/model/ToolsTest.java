@@ -1,6 +1,5 @@
 package epam.rome.moviescollection.model;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import static epam.rome.moviescollection.model.Tools.*;
