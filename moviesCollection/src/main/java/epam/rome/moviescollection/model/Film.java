@@ -57,10 +57,6 @@ public class Film implements Serializable, Comparable<Film> {
     }
 
     public void addActor(String name, String surname, int yearOfBorn) {
-        /* if (isNameSurnameEmpty(name, surname)) {
-            System.out.println("Actor wasn't added!");
-            return;     //ВОПРОС: ЕЩЁ ПРОВЕРКА НУЖНА, ВЕДЬ ПРИ СОЗДАНИИ АКТЁРА ОНА ПРОИСХОДИТ И ТАК?
-        } */
         addActor(new Actor(name, surname, yearOfBorn));
     }
 

@@ -22,10 +22,6 @@ public class FilmsLibrary implements Serializable {
     }
 
     public void addFilm(String title, int year) {
-        /* if (!isTitleAndYearCorrect(title, year)) {
-            System.out.println("Film wasn't added!");
-            return;     //ВОПРОС: ЕЩЁ ПРОВЕРКА НУЖНА, ВЕДЬ ПРИ СОЗДАНИИ АКТЁРА ОНА ПРОИСХОДИТ И ТАК?
-        } */
         addFilm(new Film(title, year));
     }
 
