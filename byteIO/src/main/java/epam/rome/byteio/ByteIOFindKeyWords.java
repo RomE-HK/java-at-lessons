@@ -17,17 +17,17 @@ public class ByteIOFindKeyWords {
             return null;
         }
         
-        Map<String, Integer> map = new LinkedHashMap<>();
+        Map<String, Integer> keywordsMap = new LinkedHashMap<>();
         try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filePath)))) {
             String fileLine;
             while ((fileLine = br.readLine()) != null) {
-                map.put(fileLine, 0);
+                keywordsMap.put(fileLine, 0);
             }
             System.out.println("Keywords successfully got");
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
-        return map;
+        return keywordsMap;
     }
 
     public static boolean findMatchesInFile(Map<String, Integer> map, String filePath) {
