@@ -76,7 +76,7 @@ public class ByteIOFindKeyWordsTest extends Suite {
         }
 
         @Test
-        public void shouldReturnTrueForGluedWords() {
+        public void shouldReturnTrueForWordsWithPunctuationMarks() {
             findMatchesInFile(testMap, testFilePath);
             assertTrue(testMap.get("break") != 0);
             assertTrue(testMap.get("continue") != 0);
