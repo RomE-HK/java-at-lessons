@@ -8,10 +8,10 @@ import java.io.*;
 import static epam.rome.moviescollection.model.Tools.isStringEmpty;
 
 public class Main {
-    static FilmsLibrary myCollection;
-    static StringBuilder info = new StringBuilder();
-    static String userInput = "";
-    static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    private static FilmsLibrary myCollection;
+    private static StringBuilder info = new StringBuilder();
+    private static String userInput = "";
+    private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
     public static void main(String[] args) {
         startMenu();
@@ -145,8 +145,7 @@ public class Main {
     }
 
     public static FilmsLibrary deserializeCollection(String filename) {
-        if (isStringEmpty(filename))
-        {
+        if (isStringEmpty(filename)) {
             System.out.println("Filename cannot be empty. Null returned");
             return null;
         }
